@@ -30,7 +30,6 @@ void AdjacencyList::printGraph() {
             cout << " ->" << node->dest << ":" << node->weight;
             node = node->next;
         }
-        cout << endl;
     }
 }
 

@@ -18,4 +18,5 @@ add_executable(AiZO2 main.cpp
         Structures/EdgeQueue.h
         Structures/SimpleStructures.h
         ShortestPathAlgorithms/Dijkstry.cpp
-        ShortestPathAlgorithms/Dijkstry.h)
+        ShortestPathAlgorithms/Dijkstry.h
+        Test/Test.cpp)
