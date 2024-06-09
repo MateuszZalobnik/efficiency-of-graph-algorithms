@@ -5,16 +5,15 @@
 #include <cstdlib>
 #include <ctime>
 #include <stdexcept>
+#include "../Structures/SimpleStructures.h"
 
 class Generator {
 public:
     // generowanie krawędzie
-    static int** generateEdges(int V, int E);
-    static int** createIncidenceMatrix(int V, int E, int** edges);
-    static int** createIncidenceMatrix(int V, int E, int** edges);
+    static Edge* generateEdges(int V, int E);
+    static int numberOfEdgesByDensityAndNodes(int V, float density);
 private:
-    static int** initEdgesTable(int E);
-    static void generateSpanningTree(int V, int** edges);
+    static void generateSpanningTree(int V, Edge* edges);
 };
 
 

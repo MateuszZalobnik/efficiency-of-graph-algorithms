@@ -5,4 +5,15 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(AiZO2 main.cpp
         Helpers/Generator.cpp
-        Helpers/Generator.h)
+        Helpers/Generator.h
+        AdjacencyList/AdjacencyList.cpp
+        AdjacencyList/AdjacencyList.h
+        IncidenceMatrix/IncidenceMatrix.cpp
+        IncidenceMatrix/IncidenceMatrix.h
+        MST/Kruskal.cpp
+        MST/Kruskal.h
+        MST/Prim.cpp
+        MST/Prim.h
+        Structures/EdgeQueue.cpp
+        Structures/EdgeQueue.h
+        Structures/SimpleStructures.h)
