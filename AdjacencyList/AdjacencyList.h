@@ -13,11 +13,13 @@ class AdjacencyList {
 private:
     int V;
     int E;
+    bool directed = false;
     struct AdjList* array;
     void addEdge(int src, int dest, int weight);
     AdjListNode* newAdjListNode(int dest, int weight);
 public:
-    explicit AdjacencyList(int V, int E, Edge *edges) {
+    explicit AdjacencyList(int V, int E, Edge *edges, bool directed) {
+        this->directed = directed;
         this->V = V;
         this->E = E;
         this->array = new struct AdjList[V];

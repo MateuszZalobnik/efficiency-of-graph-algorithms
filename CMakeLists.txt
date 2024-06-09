@@ -16,4 +16,6 @@ add_executable(AiZO2 main.cpp
         MST/Prim.h
         Structures/EdgeQueue.cpp
         Structures/EdgeQueue.h
-        Structures/SimpleStructures.h)
+        Structures/SimpleStructures.h
+        ShortestPathAlgorithms/Dijkstry.cpp
+        ShortestPathAlgorithms/Dijkstry.h)

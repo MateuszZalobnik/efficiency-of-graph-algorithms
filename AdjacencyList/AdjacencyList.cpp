@@ -7,9 +7,11 @@ void AdjacencyList::addEdge(int src, int dest, int weight) {
     this->array[src].head = newNode;
 
     // Jeśli graf jest nieskierowany, dodaj również odwrotną krawędź
-    newNode = newAdjListNode(src, weight);
-    newNode->next = this->array[dest].head;
-    this->array[dest].head = newNode;
+    if (!this->directed) {
+        newNode = newAdjListNode(src, weight);
+        newNode->next = this->array[dest].head;
+        this->array[dest].head = newNode;
+    }
 }
 
 struct AdjListNode* AdjacencyList::newAdjListNode(int dest, int weight) {

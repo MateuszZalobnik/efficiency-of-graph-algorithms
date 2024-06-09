@@ -5,6 +5,7 @@
 #include "IncidenceMatrix/IncidenceMatrix.h"
 #include "MST/Kruskal.h"
 #include "MST/Prim.h"
+#include "ShortestPathAlgorithms/Dijkstry.h"
 #include <cstdlib>
 #include <ctime>
 
@@ -20,14 +21,31 @@ int main() {
     int E = Generator::numberOfEdgesByDensityAndNodes(V, density);
     Edge *edges = Generator::generateEdges(V, E);
 
-    auto incidenceMatrix = new IncidenceMatrix(V, E, edges);
+    auto incidenceMatrix = new IncidenceMatrix(V, E, edges, true);
     incidenceMatrix->printMatrix();
-    auto adjacencyList = new AdjacencyList(V, E, edges);
+    auto adjacencyList = new AdjacencyList(V, E, edges, true);
     adjacencyList->printGraph();
 
 
-    // Kruskal's algorithm
-//    auto result = Kruskal::kruskalMST(edges, V, E);
+
+    auto dijkstry = new Dijkstry(*incidenceMatrix, 0, 5);
+    cout << "koszt calkowity: ";
+    dijkstry->printTotalCost();
+    cout << endl;
+    dijkstry->printPath();
+
+    cout << endl;
+    cout << endl;
+    cout << endl;
+    auto dijkstry2 = new Dijkstry(*adjacencyList, 0, 5);
+    cout << endl;
+    cout << "koszt calkowity: ";
+    dijkstry2->printTotalCost();
+    cout << endl;
+    dijkstry2->printPath();
+
+
+
 
 //     Wyświetlenie wygenerowanych krawędzi
 //    cout << "krawedziue \n";

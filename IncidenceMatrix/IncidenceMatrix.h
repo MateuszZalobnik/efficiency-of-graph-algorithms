@@ -13,8 +13,10 @@ private:
 int **matrix;
     int V;
     int E;
+    bool directed = false;
 public:
-    IncidenceMatrix(int V, int E, Edge *edges){
+    IncidenceMatrix(int V, int E, Edge *edges, bool directed){
+        this->directed = directed;
         this->V = V;
         this->E = E;
         matrix = new int *[V];
@@ -25,9 +27,15 @@ public:
             }
         }
 
+        // przypisywanie wag
         for (int i = 0; i < E; ++i) {
-            matrix[edges[i].src][i] = edges[i].weight;
-            matrix[edges[i].dest][i] = edges[i].weight;
+            if (directed) {
+                matrix[edges[i].src][i] = edges[i].weight;
+                matrix[edges[i].dest][i] = 0 - edges[i].weight;
+            } else {
+                matrix[edges[i].src][i] = edges[i].weight;
+                matrix[edges[i].dest][i] = edges[i].weight;
+            }
         }
     }
 

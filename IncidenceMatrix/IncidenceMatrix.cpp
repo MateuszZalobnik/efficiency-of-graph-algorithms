@@ -4,7 +4,7 @@
 void IncidenceMatrix::printMatrix() {
     for (int i = 0; i < V; ++i) {
         for (int j = 0; j < E; ++j) {
-            cout << setw(2) << matrix[i][j] << " ";
+            cout << setw(3) << matrix[i][j] << " ";
         }
         cout << endl;
     }
