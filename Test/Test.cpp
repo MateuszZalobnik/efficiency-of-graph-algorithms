@@ -1,4 +1,6 @@
 #include "Test.h"
+#include "../MST/Prim.h"
+#include "../ShortestPathAlgorithms/Dijkstry.h"
 
 void Test::GraphFromFile() {
     // wybór czy graf jest skierowany
@@ -54,6 +56,8 @@ void Test::menu() {
         cout << "1. Wczytaj dane z pliku" << endl;
         cout << "2. Wygeneruj graf losowo" << endl;
         cout << "3. Wyświetl graf listowo i macierzowo" << endl;
+        cout << "4. Wykonaj algorytm MST Prima" << endl;
+        cout << "5. Wykonaj algorytm SP Dijkstry" << endl;
         cout << "7. Wróć" << endl;
         cout << "Wybierz: ";
         cin.clear();
@@ -70,6 +74,10 @@ void Test::menu() {
             generateRandomGraph();
         } else if (choice == 3) {
             displayGraph();
+        } else if (choice == 4) {
+            MstPrimAlgorithm();
+        } else if (choice == 5) {
+            SpDijkstryAlgorithm();
         } else if (choice == 7) {
             close();
         } else {
@@ -122,4 +130,54 @@ void Test::generateRandomGraph() {
 
     incidenceMatrix = new IncidenceMatrix(V, E, edges, directed);
     adjacencyList = new AdjacencyList(V, E, edges, directed);
+}
+
+void Test::MstPrimAlgorithm() {
+    // wykonanie algorytmu MST Prima
+    auto result = Prim::primMST(*incidenceMatrix);
+    auto result2 = Prim::primMST(*adjacencyList);
+}
+
+void Test::SpDijkstryAlgorithm() {
+    int start = -1;
+    cout << "Podaj wierzchołek początkowy: ";
+    cin >> start;
+    while (start < 0){
+        cout << "Podaj wierzchołek początkowy: ";
+        cin >> start;
+    }
+
+    int end = -1;
+    cout << "Podaj wierzchołek końcowy: ";
+    cin >> end;
+    while (end < 0){
+        cout << "Podaj wierzchołek końcowy: ";
+        cin >> end;
+    }
+
+    auto incidenceDijkstry = new Dijkstry(*incidenceMatrix, start, end);
+    cout << "Macierz incydencji:" << endl;
+    cout << "koszt calkowity: ";
+    incidenceDijkstry->printTotalCost();
+    cout << endl;
+    incidenceDijkstry->printPath();
+
+    cout << endl;
+    cout << endl;
+    cout << endl;
+
+    cout << "lista sąsiedztwa:" << endl;
+    auto adjacencyDijkstry = new Dijkstry(*adjacencyList, start, end);
+    cout << endl;
+    cout << "koszt calkowity: ";
+    adjacencyDijkstry->printTotalCost();
+    cout << endl;
+    adjacencyDijkstry->printPath();
+
+    // czyszczenie pamieci
+    adjacencyDijkstry->freeMemory();
+    incidenceDijkstry->freeMemory();
+
+    cout << endl;
+    cout << endl;
 }

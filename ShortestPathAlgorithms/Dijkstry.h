@@ -25,7 +25,6 @@ private:
     int end;
     void findPath(AdjacencyList adjacencyList);
     void findPath(IncidenceMatrix incidenceMatrix);
-    void freeMemory();
     void printNodeTable();
     int getLowestNode();
     void visitNode(int node);
@@ -65,6 +64,7 @@ public:
             cout << "-->" << path[i];
         }
     }
+    void freeMemory();
 
 };
 
