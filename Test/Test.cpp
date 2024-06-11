@@ -1,6 +1,7 @@
 #include "Test.h"
 #include "../MST/Prim.h"
-#include "../ShortestPathAlgorithms/Dijkstry.h"
+#include "../SP/Dijkstry.h"
+#include "../SP/BellmanFord.h"
 
 void Test::GraphFromFile() {
     // wybór czy graf jest skierowany
@@ -58,6 +59,7 @@ void Test::menu() {
         cout << "3. Wyświetl graf listowo i macierzowo" << endl;
         cout << "4. Wykonaj algorytm MST Prima" << endl;
         cout << "5. Wykonaj algorytm SP Dijkstry" << endl;
+        cout << "6. Wykonaj algorytm SP Bellmana-Forda" << endl;
         cout << "7. Wróć" << endl;
         cout << "Wybierz: ";
         cin.clear();
@@ -78,6 +80,8 @@ void Test::menu() {
             MstPrimAlgorithm();
         } else if (choice == 5) {
             SpDijkstryAlgorithm();
+        } else if (choice == 6) {
+            SpBellmanFordAlgorithm();
         } else if (choice == 7) {
             close();
         } else {
@@ -134,8 +138,27 @@ void Test::generateRandomGraph() {
 
 void Test::MstPrimAlgorithm() {
     // wykonanie algorytmu MST Prima
-    auto result = Prim::primMST(*incidenceMatrix);
-    auto result2 = Prim::primMST(*adjacencyList);
+    auto primIncidence = Prim(*incidenceMatrix, this->V);
+    auto primAdjacency = Prim(*adjacencyList, this->V);
+
+    cout << "Macierz incydencji:" << endl;
+    cout << "Czas wykonania: " << primIncidence.GetTime() << "ms\n";
+    cout << "Krawędzie mst: " << endl;
+    primIncidence.printResult();
+
+    cout << endl;
+    cout << endl;
+    cout << endl;
+
+    cout << "Lista sąsiedztwa:" << endl;
+    cout << "Czas wykonania: " << primAdjacency.GetTime() << "ms\n";
+    cout << "Krawędzie mst: " << endl;
+    primAdjacency.printResult();
+
+    cout << endl;
+    // zwolnienie pamięci
+    primIncidence.freeMemory();
+    primAdjacency.freeMemory();
 }
 
 void Test::SpDijkstryAlgorithm() {
@@ -157,6 +180,7 @@ void Test::SpDijkstryAlgorithm() {
 
     auto incidenceDijkstry = new Dijkstry(*incidenceMatrix, start, end);
     cout << "Macierz incydencji:" << endl;
+    cout << "Czas wykonania: " << incidenceDijkstry->GetTime() << "ms\n";
     cout << "koszt calkowity: ";
     incidenceDijkstry->printTotalCost();
     cout << endl;
@@ -166,9 +190,9 @@ void Test::SpDijkstryAlgorithm() {
     cout << endl;
     cout << endl;
 
-    cout << "lista sąsiedztwa:" << endl;
     auto adjacencyDijkstry = new Dijkstry(*adjacencyList, start, end);
-    cout << endl;
+    cout << "lista sąsiedztwa:" << endl;
+    cout << "Czas wykonania: " << adjacencyDijkstry->GetTime() << "ms\n";
     cout << "koszt calkowity: ";
     adjacencyDijkstry->printTotalCost();
     cout << endl;
@@ -177,6 +201,51 @@ void Test::SpDijkstryAlgorithm() {
     // czyszczenie pamieci
     adjacencyDijkstry->freeMemory();
     incidenceDijkstry->freeMemory();
+
+    cout << endl;
+    cout << endl;
+}
+
+void Test::SpBellmanFordAlgorithm() {
+int start = -1;
+    cout << "Podaj wierzchołek początkowy: ";
+    cin >> start;
+    while (start < 0){
+        cout << "Podaj wierzchołek początkowy: ";
+        cin >> start;
+    }
+
+    int end = -1;
+    cout << "Podaj wierzchołek końcowy: ";
+    cin >> end;
+    while (end < 0){
+        cout << "Podaj wierzchołek końcowy: ";
+        cin >> end;
+    }
+
+    auto incidenceBellmanFord = new BellmanFord(*incidenceMatrix, start, end);
+    cout << "Macierz incydencji:" << endl;
+    cout << "Czas wykonania: " << incidenceBellmanFord->GetTime() << "ms\n";
+    cout << "koszt calkowity: ";
+    incidenceBellmanFord->printTotalCost();
+    cout << endl;
+    incidenceBellmanFord->printPath();
+
+    cout << endl;
+    cout << endl;
+    cout << endl;
+
+    auto adjacencyBellmanFord = new BellmanFord(*adjacencyList, start, end);
+    cout << "lista sąsiedztwa:" << endl;
+    cout << "Czas wykonania: " << adjacencyBellmanFord->GetTime() << "ms\n";
+    cout << "koszt calkowity: ";
+    adjacencyBellmanFord->printTotalCost();
+    cout << endl;
+    adjacencyBellmanFord->printPath();
+
+    // czyszczenie pamieci
+    adjacencyBellmanFord->freeMemory();
+    incidenceBellmanFord->freeMemory();
 
     cout << endl;
     cout << endl;

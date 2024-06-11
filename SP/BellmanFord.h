@@ -1,18 +1,13 @@
 
-#ifndef AIZO2_DIJKSTRY_H
-#define AIZO2_DIJKSTRY_H
+#ifndef AIZO2_BELLMANFORD_H
+#define AIZO2_BELLMANFORD_H
 
 
 #include "../AdjacencyList/AdjacencyList.h"
 #include "../IncidenceMatrix/IncidenceMatrix.h"
+#include "../Helpers/Timer.h"
 
-struct Node {
-    int current;
-    int cost;
-    int previous;
-};
-
-class Dijkstry {
+class BellmanFord {
 private:
     int V;
     int E;
@@ -23,15 +18,14 @@ private:
     Node *nodeTable;
     int start;
     int end;
+    double time;
     void findPath(AdjacencyList adjacencyList);
     void findPath(IncidenceMatrix incidenceMatrix);
     void printNodeTable();
-    int getLowestNode();
-    void visitNode(int node);
-    bool isNodeVisited(int node);
     void initNodeTable();
 public:
-    Dijkstry(AdjacencyList adjacencyList, int start, int end) {
+    BellmanFord(AdjacencyList adjacencyList, int start, int end) {
+        this->E = adjacencyList.getE();
         this->V = adjacencyList.getV();
         this->start = start;
         this->end = end;
@@ -39,10 +33,15 @@ public:
         this->nodeTable = new Node[V];
         this->visitedNodes = new int[V];
 
+        auto timer = Timer();
+        timer.StartCounter();
+
         findPath(adjacencyList);
+
+        this->time = timer.GetCounter();
     }
 
-    Dijkstry(IncidenceMatrix incidenceMatrix, int start, int end) {
+    BellmanFord(IncidenceMatrix incidenceMatrix, int start, int end) {
         this->V = incidenceMatrix.getV();
         this->E = incidenceMatrix.getE();
         this->start = start;
@@ -51,11 +50,12 @@ public:
         this->nodeTable = new Node[V];
         this->visitedNodes = new int[V];
 
-        findPath(incidenceMatrix);
-    }
+        auto timer = Timer();
+        timer.StartCounter();
 
-    void printTotalCost() {
-        cout << cost;
+        findPath(incidenceMatrix);
+
+        this->time = timer.GetCounter();
     }
 
     void printPath() {
@@ -64,9 +64,18 @@ public:
             cout << "-->" << path[i];
         }
     }
+
+    void printTotalCost() {
+        cout << cost;
+    }
+
+    double GetTime() {
+        return this->time;
+    }
+
     void freeMemory();
 
 };
 
 
-#endif //AIZO2_DIJKSTRY_H
+#endif //AIZO2_BELLMANFORD_H

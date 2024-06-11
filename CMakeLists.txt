@@ -17,6 +17,13 @@ add_executable(AiZO2 main.cpp
         Structures/EdgeQueue.cpp
         Structures/EdgeQueue.h
         Structures/SimpleStructures.h
-        ShortestPathAlgorithms/Dijkstry.cpp
-        ShortestPathAlgorithms/Dijkstry.h
-        Test/Test.cpp)
+        SP/Dijkstry.cpp
+        SP/Dijkstry.h
+        Test/Test.cpp
+        Helpers/Timer.cpp
+        Helpers/Timer.h
+        Simulation/Simulation.cpp
+        Simulation/Simulation.h
+        SP/BellmanFord.cpp
+        SP/BellmanFord.h
+        SP/BellmanFord.h)

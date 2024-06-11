@@ -23,7 +23,6 @@ void Dijkstry::findPath(AdjacencyList adjacencyList) {
         this->visitNode(current);
     }
 
-    printNodeTable();
     // generowanie sciezki
     int i = 0;
     path[i] = end;
@@ -66,7 +65,6 @@ void Dijkstry::findPath(IncidenceMatrix incidenceMatrix) {
         this->visitNode(current);
     }
 
-    printNodeTable();
     // generowanie sciezki
     int i = 0;
     path[i] = end;

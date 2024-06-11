@@ -1,10 +1,14 @@
 
 #include "Prim.h"
 #include "../Structures/EdgeQueue.h"
+#include "../Helpers/Timer.h"
 
-Edge *Prim::primMST(AdjacencyList adjacencyList) {
+void Prim::findPath(AdjacencyList adjacencyList) {
+
+    auto timer = Timer();
+    timer.StartCounter();
+
     auto array = adjacencyList.getArray();
-
     int V = adjacencyList.getV();
     int visitedNodes[V];
     Edge *result = new Edge[V - 1];
@@ -50,19 +54,15 @@ Edge *Prim::primMST(AdjacencyList adjacencyList) {
         currentNodeIndex = edgeToAdd.dest;
     }
 
-    return result;
+    this->time = timer.GetCounter();
+    this->result = result;
 }
 
-bool Prim::IsVisited(int *arr, int size, int num) {
-    for (int i = 0; i < size; i++){
-        if(arr[i] == num){
-            return true;
-        }
-    }
-    return false;
-}
+void Prim::findPath(IncidenceMatrix incidenceMatrix) {
 
-Edge *Prim::primMST(IncidenceMatrix incidenceMatrix) {
+    auto timer = Timer();
+    timer.StartCounter();
+
     int **matrix = incidenceMatrix.getMatrix();
     int V = incidenceMatrix.getV();
     int E = incidenceMatrix.getE();
@@ -125,5 +125,26 @@ Edge *Prim::primMST(IncidenceMatrix incidenceMatrix) {
         currentNodeIndex = edgeToAdd.dest;
     }
 
-    return result;
+    this->time = timer.GetCounter();
+    this->result = result;
+}
+
+bool Prim::IsVisited(int *arr, int size, int num) {
+    for (int i = 0; i < size; i++){
+        if(arr[i] == num){
+            return true;
+        }
+    }
+    return false;
+}
+
+void Prim::printResult() {
+    for (int i = 0; i < V - 1; i++) {
+        cout << i << ": (" << result[i].src << ", "
+                  << result[i].dest << ", " << result[i].weight << ")\n";
+    }
+}
+
+void Prim::freeMemory() {
+    delete[] result;
 }

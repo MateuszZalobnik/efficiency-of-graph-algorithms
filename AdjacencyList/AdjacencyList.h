@@ -42,6 +42,10 @@ public:
     int getV() {
         return this->V;
     }
+
+    int getE() {
+        return this->E;
+    }
     void printGraph();
     void freeMemory();
 

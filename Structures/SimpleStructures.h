@@ -1,6 +1,13 @@
 
 #ifndef AIZO2_SIMPLESTRUCTURES_H
 #define AIZO2_SIMPLESTRUCTURES_H
+
+struct Node {
+    int current;
+    int cost;
+    int previous;
+};
+
 struct Edge {
     int src, dest, weight;
     Edge(int s = 0, int d = 0, int w = 0) : src(s), dest(d), weight(w) {}

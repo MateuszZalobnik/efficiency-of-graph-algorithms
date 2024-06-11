@@ -1,5 +1,5 @@
-#ifndef AIZO1_TEST_H
-#define AIZO1_TEST_H
+#ifndef AIZO2_TEST_H
+#define AIZO2_TEST_H
 
 #include <iostream>
 #include <fstream>
@@ -22,6 +22,7 @@ private:
     void close();
     void MstPrimAlgorithm();
     void SpDijkstryAlgorithm();
+    void SpBellmanFordAlgorithm();
 public:
     Test() {
     }
@@ -30,4 +31,4 @@ public:
 };
 
 
-#endif //AIZO1_TEST_H
+#endif //AIZO2_TEST_H

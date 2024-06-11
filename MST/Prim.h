@@ -9,10 +9,28 @@
 
 class Prim {
 private:
-    static bool IsVisited(int *arr,int size, int num);
+    Edge* result;
+    bool IsVisited(int *arr,int size, int num);
+    void findPath(AdjacencyList adjacencyList);
+    void findPath(IncidenceMatrix incidenceMatrix);
+    int V;
+    double time;
 public:
-    static Edge* primMST(AdjacencyList adjacencyList);
-    static Edge* primMST(IncidenceMatrix incidenceMatrix);
+    Prim(AdjacencyList adjacencyList, int V){
+        this->V = V;
+        findPath(adjacencyList);
+    }
+
+    Prim(IncidenceMatrix incidenceMatrix, int V){
+        this->V = V;
+        findPath(incidenceMatrix);
+    }
+
+    void printResult();
+    void freeMemory();
+    double GetTime(){
+        return time;
+    }
 };
 
 
