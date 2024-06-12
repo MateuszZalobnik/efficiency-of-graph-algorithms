@@ -62,6 +62,30 @@ void Simulation::displayTable() {
         }
         cout << endl;
     }
+
+    cout << endl;
+    cout << "Bellman-Ford - Lista sasiedztwa" << endl;
+    cout << setw(10) << "V" << setw(10) << "0.25" << setw(10) << "0.5" << setw(10) << "0.99" << endl;
+    for (int i = 0; i < 7; i++) {
+        cout << setw(10) << sizes[i];
+        for (int j = 0; j < 3; j++) {
+            cout << setw(10) << avgTimeBellmanFordAdjacencyList[j][i];
+        }
+        cout << endl;
+    }
+
+    cout << endl;
+    cout << "Bellman-Ford - Macierz incydencji" << endl;
+    cout << setw(10) << "V" << setw(10) << "0.25" << setw(10) << "0.5" << setw(10) << "0.99" << endl;
+    for (int i = 0; i < 7; i++) {
+        cout << setw(10) << sizes[i];
+        for (int j = 0; j < 3; j++) {
+            cout << setw(10) << avgTimeBellmanFordIncidenceMatrix[j][i];
+        }
+        cout << endl;
+    }
+
+    cout << endl;
 }
 
 void Simulation::simulate() {

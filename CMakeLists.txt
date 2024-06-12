@@ -20,7 +20,6 @@ add_executable(AiZO2 main.cpp
         SP/Dijkstry.cpp
         SP/Dijkstry.h
         Test/Test.cpp
-        Helpers/Timer.cpp
         Helpers/Timer.h
         Simulation/Simulation.cpp
         Simulation/Simulation.h

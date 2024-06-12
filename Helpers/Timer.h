@@ -1,23 +1,30 @@
 
 #ifndef AIZO2_TIMER_H
 #define AIZO2_TIMER_H
-#define WIN32_LEAN_AND_MEAN
-#define NOMINMAX
-#include <windows.h>
+
 #include <iostream>
+#include <chrono>
 
 using namespace std;
 
 
 class Timer {
 private:
-    double PCFreq = 0.0;
-    __int64 CounterStart = 0;
+    using Clock = std::chrono::high_resolution_clock;
+    using TimePoint = std::chrono::time_point<Clock>;
+
+    TimePoint start_time;
+
 public:
-    // metoda inicjalizuje licznik
-    void StartCounter();
-    // metoda zwraca czas od inicjalizacji licznika (milisekundy)
-    double GetCounter();
+    void StartCounter() {
+        start_time = Clock::now();
+    }
+
+    double GetCounter() {
+        auto end_time = Clock::now();
+        std::chrono::duration<double, std::milli> elapsed = end_time - start_time;
+        return elapsed.count();
+    }
 };
 
 

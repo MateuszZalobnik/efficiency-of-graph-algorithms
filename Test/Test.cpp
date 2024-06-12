@@ -1,7 +1,4 @@
 #include "Test.h"
-#include "../MST/Prim.h"
-#include "../SP/Dijkstry.h"
-#include "../SP/BellmanFord.h"
 
 void Test::GraphFromFile() {
     // wybór czy graf jest skierowany

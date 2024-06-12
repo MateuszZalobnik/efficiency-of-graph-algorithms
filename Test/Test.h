@@ -7,6 +7,9 @@
 #include "../AdjacencyList/AdjacencyList.h"
 #include "../IncidenceMatrix/IncidenceMatrix.h"
 #include <limits>
+#include "../MST/Prim.h"
+#include "../SP/Dijkstry.h"
+#include "../SP/BellmanFord.h"
 
 using namespace std;
 
