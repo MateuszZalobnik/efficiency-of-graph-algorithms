@@ -104,10 +104,10 @@ void Simulation::simulateSP() {
         density = densities[d];
         for (int j = 0; j < tableSize; j++) {
             V = sizes[j];
-            cout<<"#" << V << "#";
+            cout<< flush <<"#" << V << "#";
             for (int i = 0; i < iterations; i++) {
                 E = Generator::numberOfEdgesByDensityAndNodes(V, density);
-                Edge *edges = Generator::generateEdges(V, E);
+                Edge *edges = Generator::generateEdges(V, E, true);
 
                 auto adjacencyList = new AdjacencyList(V, E, edges, true);
                 auto incidenceMatrix = new IncidenceMatrix(V, E, edges, true);
@@ -150,14 +150,15 @@ void Simulation::simulateMST() {
     int V, E;
     float density;
 
+    cout << "MST" << endl;
     for (int d = 0; d < 3; d++) {
         density = densities[d];
         for (int j = 0; j < tableSize; j++) {
             V = sizes[j];
-            cout<<"#";
+            cout<< flush <<"#" << V << "#";
             for (int i = 0; i < iterations; i++) {
                 E = Generator::numberOfEdgesByDensityAndNodes(V, density);
-                Edge *edges = Generator::generateEdges(V, E);
+                Edge *edges = Generator::generateEdges(V, E, false);
 
                 auto adjacencyList = new AdjacencyList(V, E, edges, false);
                 auto incidenceMatrix = new IncidenceMatrix(V, E, edges, false);

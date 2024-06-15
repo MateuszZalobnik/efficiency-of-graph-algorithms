@@ -127,7 +127,7 @@ void Test::generateRandomGraph() {
     directed = c == 't';
 
     E = Generator::numberOfEdgesByDensityAndNodes(V, density);
-    Edge *edges = Generator::generateEdges(V, E);
+    Edge *edges = Generator::generateEdges(V, E, false);
 
     incidenceMatrix = new IncidenceMatrix(V, E, edges, directed);
     adjacencyList = new AdjacencyList(V, E, edges, directed);

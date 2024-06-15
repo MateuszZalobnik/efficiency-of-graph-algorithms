@@ -2,7 +2,7 @@
 #include "BellmanFord.h"
 
 void BellmanFord::initNodeTable() {
-    for (int i = 0; i < V; ++i) {
+    for (int i = 0; i < V; i++) {
         if (i == start) {
             nodeTable[i].cost = 0;
             nodeTable[i].previous = i;
@@ -48,10 +48,10 @@ void BellmanFord::findPath(AdjacencyList adjacencyList) {
     int k = 0, current = 0;
     AdjListNode *node = nodes[current].head;
 
-    for (int i = 0; i < V - 1; ++i) {
+    for (int i = 0; i < V - 1; i++) {
         while (k < E) {
             int cost = node->weight;
-            if (nodeTable[current].cost + cost < nodeTable[node->dest].cost) {
+            if (nodeTable[current].cost + cost < nodeTable[node->dest].cost && nodeTable[current].cost != INT_MAX) {
                 // wykonujemy relaksacje
                 nodeTable[node->dest].cost = nodeTable[current].cost + cost;
                 nodeTable[node->dest].previous = current;
@@ -65,6 +65,10 @@ void BellmanFord::findPath(AdjacencyList adjacencyList) {
             }
             k++;
         }
+
+        k = 0;
+        current = 0;
+        node = nodes[current].head;
     }
 
     // generowanie sciezki
@@ -82,10 +86,11 @@ void BellmanFord::findPath(AdjacencyList adjacencyList) {
 
 void BellmanFord::findPath(IncidenceMatrix incidenceMatrix) {
     initNodeTable();
-    int k = 0, current = 0, dest = 0;
+    int k = 0, current = start, dest = 0;
     int **matrix = incidenceMatrix.getMatrix();
 
-    for (int i = 0; i < V - 1; ++i) {
+
+    for (int i = 0; i < V - 1; i++) {
         k = 0;
         while (k < E) {
             for (int j = 0; j < V; j++){
@@ -97,7 +102,9 @@ void BellmanFord::findPath(IncidenceMatrix incidenceMatrix) {
                 }
             }
             int cost = matrix[current][k];
-            if (nodeTable[current].cost + cost < nodeTable[dest].cost) {
+
+            // sprawdzamy czy relaksacja jest mozliwa
+            if (nodeTable[current].cost + cost < nodeTable[dest].cost && nodeTable[current].cost != INT_MAX) {
                 // wykonujemy relaksacje
                 nodeTable[dest].cost = nodeTable[current].cost + cost;
                 nodeTable[dest].previous = current;

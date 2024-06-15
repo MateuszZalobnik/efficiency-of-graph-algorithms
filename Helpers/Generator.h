@@ -10,10 +10,10 @@
 class Generator {
 public:
     // generowanie krawędzie
-    static Edge* generateEdges(int V, int E);
+    static Edge* generateEdges(int V, int E, bool directed);
     static int numberOfEdgesByDensityAndNodes(int V, float density);
 private:
-    static void generateSpanningTree(int V, Edge* edges);
+    static void generateSpanningTree(int V, Edge* edges, int* currentNumberOfEdges);
 };
 
 

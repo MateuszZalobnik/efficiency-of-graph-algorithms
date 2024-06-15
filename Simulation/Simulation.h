@@ -11,7 +11,7 @@ class Simulation {
 private:
     int iterations = 50;
     int tableSize = 7;
-    int sizes[7] = {20, 40, 60, 80, 100, 120, 140};
+    int sizes[7] = {70, 80, 90, 100, 110, 120, 130};
     float densities[3] = {0.25, 0.5, 0.99};
     double avgTimePrimAdjacencyList[3][7];
     double avgTimePrimIncidenceMatrix[3][7];

@@ -9,7 +9,7 @@ void Prim::findPath(AdjacencyList adjacencyList) {
     timer.StartCounter();
 
     auto array = adjacencyList.getArray();
-    int V = adjacencyList.getV();
+    this->V = adjacencyList.getV();
     int visitedNodes[V];
     Edge *result = new Edge[V - 1];
 
@@ -64,7 +64,7 @@ void Prim::findPath(IncidenceMatrix incidenceMatrix) {
     timer.StartCounter();
 
     int **matrix = incidenceMatrix.getMatrix();
-    int V = incidenceMatrix.getV();
+    this->V = incidenceMatrix.getV();
     int E = incidenceMatrix.getE();
 
     int visitedNodes[V];
